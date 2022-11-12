@@ -3,7 +3,7 @@ import tourModel from "../models/tour.js";
 
 export const createTour = async (req, res) => {
     const tour = req.body;
-    // console.log(req.userId);
+    console.log("create");
     const newTour = new tourModel({
         ...tour,
         creator: req.userId,
@@ -24,7 +24,8 @@ export const EditTour = async (req, res) => {
     console.log("title", tour.title);
     console.log(tour._id);
     try {
-        const newTour = await tourModel.findByIdAndUpdate({ _id: tour._id }, { title: tour.title, discription: tour.discription, tags: tour.tags, imageFile: tour.imageFile })
+        const newTour = await tourModel.findByIdAndUpdate({ _id: tour._id }, { title: tour.title, discription: tour.discription, tags: tour.tags, imageFile: tour.imageFile }, { new: true })
+        console.log(newTour);
         res.status(201).json(newTour);
     } catch (error) {
         console.log(error);
