@@ -1,4 +1,3 @@
-import Express from "express";
 import tourModel from "../models/tour.js";
 
 export const createTour = async (req, res) => {
@@ -10,7 +9,7 @@ export const createTour = async (req, res) => {
         createdAt: new Date()
     });
     try {
-        const a = await newTour.save();
+        await newTour.save();
         console.log("new tour created");
         res.status(201).json(newTour);
 
