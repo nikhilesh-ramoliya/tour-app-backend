@@ -38,7 +38,7 @@ export const signup = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({
-            message: "something went wrong"
+            message: "something went wrong in sign up"
         })
         console.log(error);
     }
@@ -46,10 +46,6 @@ export const signup = async (req, res) => {
 
 export const signin = async (req, res) => {
     const { email, password } = req.body;
-    console.log(
-        "signin"
-    );
-
     try {
         const oldUser = await Usermodel.findOne({ email });
         if (!oldUser) return res.status(404).json({ message: "user does'nt exist" })
@@ -57,9 +53,10 @@ export const signin = async (req, res) => {
         if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid Password" });
         const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "1h" });
         res.status(200).json({ result: oldUser, token });
+        console.log("sign in successfull");
     } catch (error) {
         res.status(500).json({
-            message: "something went wrong"
+            message: "something went wrong sign in"
         })
         console.log(error);
     }
@@ -83,7 +80,7 @@ export const googlesignin = async (req, res) => {
         res.status(200).json({ result, token1 })
     } catch (error) {
         res.status(500).json({
-            message: "something went wrong"
+            message: "something went wrong in google signin"
         })
         console.log(error);
     }
