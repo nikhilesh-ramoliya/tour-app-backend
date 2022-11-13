@@ -18,7 +18,7 @@ export const createTour = async (req, res) => {
     }
 }
 export const EditTour = async (req, res) => {
-    tour = req.body
+    const tour = req.body
     try {
         const newTour = await tourModel.findByIdAndUpdate({ _id: tour._id }, { title: tour.title, discription: tour.discription, tags: tour.tags, imageFile: tour.imageFile }, { new: true })
         console.log("edited successfully");
