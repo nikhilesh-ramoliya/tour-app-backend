@@ -4,7 +4,6 @@ import UserModel from "../models/user.js";
 export const auth = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
-        // console.log(token)
         const a = jwt.verify(token, process.env.SECRETEJWT, { algorithm: ['RS256'] })
 
         const isCustomAuth = token.length < 500;
